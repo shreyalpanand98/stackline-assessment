@@ -1,25 +1,25 @@
-import styles from './dataTable.module.css'
-import data from '../data/stackline_frontend_assessment_data_2021.json'
-import * as React from "react"
-import {useTable} from 'react-table'
+import styles from './dataTable.module.css';
+import data from '../data/stackline_frontend_assessment_data_2021.json';
+import React, { useState, useMemo } from 'react';
+import { useTable, useSortBy } from 'react-table';
 
-const salesData = data[0].sales
-// console.log(salesData)
+const salesData = data[0].sales;
 
 export default function DataTable() {
-    const data = React.useMemo(() => salesData, [])
-    const columns = React.useMemo(() => [
+    const columns = useMemo(() => [
         {
             Header: "WEEK ENDING",
             accessor: "weekEnding"
         },
         {
             Header: "RETAIL SALES",
-            accessor: "retailSales"
+            accessor: "retailSales",
+            Cell: ({ value }) => `$${value.toLocaleString()}`
         },
         {
             Header: "WHOLESALE SALES",
-            accessor: "wholesaleSales"
+            accessor: "wholesaleSales",
+            Cell: ({ value }) => `$${value.toLocaleString()}`
         },
         {
             Header: "UNITS SOLD",
@@ -27,41 +27,50 @@ export default function DataTable() {
         },
         {
             Header: "RETAILER MARGIN",
-            accessor: "retailerMargin"
+            accessor: "retailerMargin",
+            Cell: ({ value }) => `$${value.toLocaleString()}`
         },
-    ], [])
+    ], []);
 
-    const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} = useTable({columns, data})
+    const data = useMemo(() => salesData, []);
 
-    return(
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+    } = useTable({ columns, data }, useSortBy);
+
+    return (
         <div className={styles.container}>
             <table className={styles.table} {...getTableProps()}>
                 <thead>
-                    {headerGroups.map((headerGroup) => (
+                    {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()}>
-                                    {column.render("Header")}
+                            {headerGroup.headers.map(column => (
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                    {column.render('Header')}
                                 </th>
                             ))}
                         </tr>
                     ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {rows.map((row) => {
-                        prepareRow(row)
+                    {rows.map(row => {
+                        prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>
-                                {row.cells.map((cell) => (
-                                    <td {...cell.getCellProps()}> 
+                                {row.cells.map(cell => (
+                                    <td {...cell.getCellProps()}>
                                         {cell.render('Cell')}
                                     </td>
                                 ))}
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </table>
         </div>
-    )
+    );
 }
