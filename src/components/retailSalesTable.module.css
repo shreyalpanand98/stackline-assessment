@@ -1,0 +1,12 @@
+.container {
+    height: 50%;
+    display:flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.tableInfo {
+    background-color: white;
+    height: 95%;
+    width: 98%
+}

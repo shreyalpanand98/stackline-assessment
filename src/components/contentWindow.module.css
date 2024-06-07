@@ -1,0 +1,5 @@
+.window {
+    height:1000px;
+    background-color:rgb(222, 220, 220);
+    display:flex;
+}

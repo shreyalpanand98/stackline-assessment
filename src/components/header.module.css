@@ -1,0 +1,22 @@
+.header {
+    height: 75px;
+    background-color: #052849;
+}
+
+.logoContainer {
+    height: 75px;
+    width:300px;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+.logo {
+    height:50px;
+    width:300px;
+    background-image: url("../images/stackline_logo.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: scale(0.5);
+}
