@@ -1,5 +1,5 @@
 # Introduction:
-This is an Online assessment for Frontend software engineer at Stackline for Shreyal Prakashkumar Anand. This project provides a webpage which shows information of an item and the slaes of that item.
+This project provides a webpage which shows information of an item and the slaes of that item. It showcases the skills of using react-tables and react-graphs in a project.
 
 ## More details
 - The left pane of the page provides the information of the item, including image, name, tags and detail about it.
